@@ -25,7 +25,6 @@ namespace ResultsGenerator
             records.Sort(delegate (ResultsRow r1, ResultsRow r2) { return r1.QualifyTime.CompareTo(r2.QualifyTime); });
 
             using (var file = new StreamWriter(@"C:\Users\olsso\Downloads\tmp\res.csv"))
-
             {
                 var count = 0;
                 foreach (var line in records)
