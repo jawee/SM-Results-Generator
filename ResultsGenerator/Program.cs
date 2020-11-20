@@ -52,7 +52,10 @@ namespace ResultsGenerator
             var records = new List<ResultsRow>();
             //convert result files to utf-8 here: https://subtitletools.com/convert-text-files-to-utf8-online
 
-            var files = Directory.GetFiles(@"C:\Users\olsso\Documents\Projects\ResultsGenerator\Files\Okayama\", "*.csv");
+            var path = @"/Users/figge/Projects/SM-Results-Generator/Files/Okayama/";
+            // var path = "C:\Users\olsso\Documents\Projects\ResultsGenerator\Files\Okayama\";
+
+            var files = Directory.GetFiles(path, "*.csv");
 
             foreach(var file in files)
             {
@@ -63,7 +66,7 @@ namespace ResultsGenerator
 
             records.Sort(delegate (ResultsRow r1, ResultsRow r2) { return r1.QualifyTime.CompareTo(r2.QualifyTime); });
 
-            using (var file = new StreamWriter(@"C:\Users\olsso\Documents\Projects\ResultsGenerator\Files\Okayama\index.html"))
+            using (var file = new StreamWriter($"{path}index.html"))
             {
                 file.WriteLine(top);
                 var count = 0;
@@ -75,7 +78,6 @@ namespace ResultsGenerator
             }
 
             Console.WriteLine("Done");
-            Console.ReadLine();
         }
 
 
