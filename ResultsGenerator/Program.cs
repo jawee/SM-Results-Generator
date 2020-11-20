@@ -14,17 +14,19 @@ namespace ResultsGenerator
         {
             var records = new List<ResultsRow>();
             //convert to utf-8 here: https://subtitletools.com/convert-text-files-to-utf8-online
-            var file1 = @"C:\Users\olsso\Downloads\tmp\eventresult_35674144.csv";
-            var file2 = @"C:\Users\olsso\Downloads\tmp\eventresult_35701388.csv";
+            var file1 = @"C:\Users\olsso\Documents\Projects\ResultsGenerator\Files\Okayama\eventresult_35813272.csv";
+            var file2 = @"C:\Users\olsso\Documents\Projects\ResultsGenerator\Files\Okayama\eventresult_35813273.csv";
+            var file3 = @"C:\Users\olsso\Documents\Projects\ResultsGenerator\Files\Okayama\eventresult_35813274.csv";
 
             records = ReadFile(file1, records);
             records = ReadFile(file2, records);
+            records = ReadFile(file3, records);
 
             records = removeDuplicates(records);
 
             records.Sort(delegate (ResultsRow r1, ResultsRow r2) { return r1.QualifyTime.CompareTo(r2.QualifyTime); });
 
-            using (var file = new StreamWriter(@"C:\Users\olsso\Downloads\tmp\res.csv"))
+            using (var file = new StreamWriter(@"C:\Users\olsso\Documents\Projects\ResultsGenerator\Files\Okayama\res.csv"))
             {
                 var count = 0;
                 foreach (var line in records)
