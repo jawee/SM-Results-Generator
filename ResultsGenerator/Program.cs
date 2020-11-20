@@ -153,7 +153,6 @@ namespace ResultsGenerator
     {
         public string Name { get; set; }
         public DateTime QualifyTime { get; set; }
-
         public int LapsComp { get; set; }
        
     }
