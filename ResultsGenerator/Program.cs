@@ -41,7 +41,7 @@ namespace ResultsGenerator
                               <h1 class=""text-center"">Kvaltider Okayama</h1>
                               <table class=""table"">
                                 <thead>
-                                  <tr><th>Placering</th><th>Namn</th><th>Tid</th></td>
+                                  <tr><th>Placering</th><th>Namn</th><th>Tid</th><th>Antal körda varv</th></td>
                                 </thead>
                                 <tbody>";
 
@@ -69,7 +69,7 @@ namespace ResultsGenerator
                 var count = 0;
                 foreach (var line in records)
                 {
-                    file.WriteLine("<tr><td>" + ++count + "</td><td>" + line.Name + "</td><td>" + line.QualifyTime.ToString("mm:ss.fff") + "</td></tr>");
+                    file.WriteLine("<tr><td>" + ++count + "</td><td>" + line.Name + "</td><td>" + line.QualifyTime.ToString("mm:ss.fff") + "</td><td>" + line.LapsComp + "</td></tr>");
                 }
                 file.WriteLine(bottom);
             }
@@ -100,7 +100,8 @@ namespace ResultsGenerator
                         var resultsRow = new ResultsRow
                         {
                             Name = csv.GetField("Name"),
-                            QualifyTime = DateTime.ParseExact(qualifyTimeStr, "m:ss.fff", CultureInfo.InvariantCulture)
+                            QualifyTime = DateTime.ParseExact(qualifyTimeStr, "m:ss.fff", CultureInfo.InvariantCulture),
+                            LapsComp = csv.GetField<int>("Laps Comp")
                         };
                         list.Add(resultsRow);
                     }
@@ -127,9 +128,11 @@ namespace ResultsGenerator
                     }
                     if(res.QualifyTime > best.QualifyTime)
                     {
+                        best.LapsComp += res.LapsComp;
                         toBeRemoved.Add(res);
                     } else
                     {
+                        res.LapsComp += best.LapsComp;
                         toBeRemoved.Add(best);
                         best = res;
                     }
@@ -150,6 +153,8 @@ namespace ResultsGenerator
     {
         public string Name { get; set; }
         public DateTime QualifyTime { get; set; }
+
+        public int LapsComp { get; set; }
        
     }
 }
