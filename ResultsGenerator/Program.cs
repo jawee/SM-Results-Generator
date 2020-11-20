@@ -50,14 +50,14 @@ namespace ResultsGenerator
                         </body>
                         </html>";
             var records = new List<ResultsRow>();
-            //convert to utf-8 here: https://subtitletools.com/convert-text-files-to-utf8-online
-            var file1 = @"C:\Users\olsso\Documents\Projects\ResultsGenerator\Files\Okayama\eventresult_35813272.csv";
-            var file2 = @"C:\Users\olsso\Documents\Projects\ResultsGenerator\Files\Okayama\eventresult_35813273.csv";
-            var file3 = @"C:\Users\olsso\Documents\Projects\ResultsGenerator\Files\Okayama\eventresult_35813274.csv";
+            //convert result files to utf-8 here: https://subtitletools.com/convert-text-files-to-utf8-online
 
-            records = ReadFile(file1, records);
-            records = ReadFile(file2, records);
-            records = ReadFile(file3, records);
+            var files = Directory.GetFiles(@"C:\Users\olsso\Documents\Projects\ResultsGenerator\Files\Okayama\", "*.csv");
+
+            foreach(var file in files)
+            {
+                records = ReadFile(file, records);
+            }
 
             records = removeDuplicates(records);
 
@@ -73,7 +73,9 @@ namespace ResultsGenerator
                 }
                 file.WriteLine(bottom);
             }
-            
+
+            Console.WriteLine("Done");
+            Console.ReadLine();
         }
 
 
@@ -83,21 +85,22 @@ namespace ResultsGenerator
             {
                 using (var csv = new CsvReader(reader, CultureInfo.InvariantCulture))
                 {
+                    // Lines without results
                     csv.Read();
                     csv.Read();
                     csv.Read();
                     csv.ReadHeader();
                     while (csv.Read())
                     {
-                        var qualifyTimeStr = "0" + csv.GetField("Qualify Time");
-                        if (qualifyTimeStr == "0")
+                        var qualifyTimeStr = csv.GetField("Qualify Time");
+                        if (String.IsNullOrWhiteSpace(qualifyTimeStr))
                         {
                             continue;
                         }
                         var resultsRow = new ResultsRow
                         {
                             Name = csv.GetField("Name"),
-                            QualifyTime = DateTime.ParseExact("0" + csv.GetField("Qualify Time"), "mm:ss.fff", CultureInfo.InvariantCulture)
+                            QualifyTime = DateTime.ParseExact(qualifyTimeStr, "m:ss.fff", CultureInfo.InvariantCulture)
                         };
                         list.Add(resultsRow);
                     }
