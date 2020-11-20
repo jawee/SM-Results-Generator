@@ -53,6 +53,7 @@ namespace ResultsGenerator
             //convert result files to utf-8 here: https://subtitletools.com/convert-text-files-to-utf8-online
 
             var path = @"/Users/figge/Projects/SM-Results-Generator/Files/Okayama/";
+            // var path = "C:\Users\olsso\Documents\Projects\ResultsGenerator\Files\Okayama\";
 
             var files = Directory.GetFiles(path, "*.csv");
 
