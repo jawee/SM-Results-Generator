@@ -38,14 +38,14 @@ namespace ResultsGenerator
                           </head>
                           <body>
                             <div class=""container"">
-                              <h1 class=""text-center"">Kvaltider Okayama</h1>
+                              <h1 class=""text-center"">Kvaltider Imola</h1>
                               <table class=""table"">
                                 <thead>
                                   <tr><th>Placering</th><th>Namn</th><th>Tid</th><th>Antal körda varv</th></td>
                                 </thead>
                                 <tbody>";
 
-            var bottom = @"</tbody>
+            var bottom = @"</tbody></table>
                         </div>
                         </body>
                         </html>";
@@ -53,7 +53,7 @@ namespace ResultsGenerator
             //convert result files to utf-8 here: https://subtitletools.com/convert-text-files-to-utf8-online
 
             //var path = @"/Users/figge/Projects/SM-Results-Generator/Files/Okayama/";
-            var path = @"C:\Users\olsso\Documents\Projects\ResultsGenerator\Files\Okayama\";
+            var path = @"C:\Users\olsso\Documents\Projects\ResultsGenerator\Files\Imola\";
 
             var files = Directory.GetFiles(path, "*.csv");
 
