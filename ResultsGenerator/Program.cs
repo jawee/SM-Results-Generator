@@ -39,6 +39,8 @@ namespace ResultsGenerator
                           <body>
                             <div class=""container"">
                               <h1 class=""text-center"">Kvaltider Imola</h1>
+                            <h5 class=""text-center"">Andra resultat</h5>
+                                    < h6 class=""text-center""><a href = ""/"" >Imola</a>   < a href=""/okayama.html"">Okayama</a></h6>
                               <table class=""table"">
                                 <thead>
                                   <tr><th>Placering</th><th>Namn</th><th>Tid</th><th>Antal körda varv</th></td>
